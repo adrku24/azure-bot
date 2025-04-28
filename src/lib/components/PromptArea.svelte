@@ -7,6 +7,10 @@
             </div>
 
             <div class="flex w-full items-center justify-end gap-2 px-1 py-1">
+                <button class="bg-transparent hover:bg-teal-800 text-teal-700 font-semibold hover:text-white py-1 px-4 border border-teal-500 hover:border-transparent rounded text-sm">
+                    Liste alle Accounts
+                </button>
+
                 <button class="rounded-radius p-1 text-on-surface/75 hover:bg-surface-dark/10 hover:text-on-surface focus:outline-hidden focus-visible:text-on-surface focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-primary active:bg-surface-dark/5 active:-outline-offset-2 dark:text-on-surface-dark/75 dark:hover:bg-surface/10 dark:hover:text-on-surface-dark dark:focus-visible:text-on-surface-dark dark:focus-visible:outline-primary-dark dark:active:bg-surface/5 hover:cursor-pointer" title="Use Voice" aria-label="Use Voice">
                     <svg viewBox="0 0 20 20" fill="currentColor" class="size-5" aria-hidden="true">
                         <path d="M7 4a3 3 0 0 1 6 0v6a3 3 0 1 1-6 0V4Z" />
