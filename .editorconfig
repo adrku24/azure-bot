@@ -1,0 +1,14 @@
+root = true
+
+[*]
+# Uniform character encoding
+charset = utf-8
+# Use tabs instead of spaces
+indent_style = space
+# Use one tab
+indent_size = 4
+# Removes unnecessary spaces at the end of a line
+trim_trailing_whitespace = true
+# Unix-style newlines with a newline ending every file
+end_of_line = lf
+insert_final_newline = true
