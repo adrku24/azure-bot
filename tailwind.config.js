@@ -4,7 +4,8 @@ export default {
         './src/**/*.{html,js,svelte,ts}'
     ],
     plugins: [
-        require('@tailwindcss/typography')
+        require('@tailwindcss/typography'),
+        require('tailwind-hamburgers')
     ],
     darkMode: 'class'
 };
