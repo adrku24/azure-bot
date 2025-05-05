@@ -20,25 +20,27 @@ class LLM {
         this._client = new AzureOpenAI(options);
     }
 
-    completion(user, system, use_streaming = true) {
+    completion(user, system, conversation = [], use_streaming = true) {
         if (user === undefined || user === null) {
             return null;
         }
 
-        const messages = [{
-            "role": "user",
-            "content": user
-        }];
-
         if (system !== null && system !== undefined) {
-            messages.push({
+            conversation = [{
                 "role": "system",
                 "content": system
-            });
+            }].concat(conversation)
         }
 
+        conversation.push({
+            "role": "user",
+            "content": user
+        });
+
+        console.dir(conversation);
+
         return this._client.chat.completions.create({
-            messages: messages,
+            messages: conversation,
             max_tokens: 2048,
             temperature: 0.01,
             top_p: 1,

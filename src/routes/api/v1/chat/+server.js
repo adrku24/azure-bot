@@ -12,7 +12,7 @@ export async function POST({ request }) {
         return json(undefined, { status: 400 });
     }
 
-    let modifiedConversation = "";
+    let messages = [];
     if(conversation !== null && conversation !== undefined && conversation instanceof Array) {
         for(let i = 0; i < conversation.length; i++) {
             const role = conversation[i].role;
@@ -21,22 +21,24 @@ export async function POST({ request }) {
             const content = conversation[i].content;
             if(content === null || content === undefined) continue;
 
-            modifiedConversation = modifiedConversation + "\n" + role.toUpperCase() + ":" + content;
+            messages.push({
+                "role": role.toUpperCase() === "USER" ? "user" : "assistant",
+                "content": content
+            });
         }
     }
 
     // TODO: add accounts to system prompt
-    let pseudoAccounts = JSON.stringify([{
+    let pseudoAccounts = JSON.stringify({
         first_name: "Robert",
         last_name: "Burgers",
         email: "robert.burgers@gmail.com"
-    }]);
+    });
 
     const modifiedSystemPrompt = SYSTEM_PROMPT
-        .replace("{accounts}", pseudoAccounts)
-        .replace("{conversation}", modifiedConversation);
+        .replace("{accounts}", pseudoAccounts);
 
-    const streamIterator = await AzureChatGPT.completion(prompt, modifiedSystemPrompt, true);
+    const streamIterator = await AzureChatGPT.completion(prompt, modifiedSystemPrompt, messages, true);
     if(streamIterator === null) return json(undefined, { status: 400 });
 
     const encoder = new TextEncoder();

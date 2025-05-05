@@ -3,7 +3,7 @@
 
     export let messages = [];
     export let generating = false;
-    export let temp = "That's awesome. I think our ";
+    export let temp = "";
 
     function addMessage(who, message) {
         messages.push({
@@ -16,23 +16,53 @@
         messages = messages;
     }
 
-    function sendPrompt() {
-        if(generating) return;
+    async function sendPrompt() {
+        if (generating) return;
         generating = true;
 
         const prompt = document.getElementById("prompt").textContent;
-        if(!prompt) return;
+        if (!prompt) return;
 
         const conversation = messages.map(message => {
             return {
                 role: message.who,
-                content: message.content
+                content: message.message
             }
         });
 
         addMessage("user", prompt);
-
         document.getElementById("prompt").textContent = "";
+
+        const stream = await fetch("/api/v1/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                prompt: prompt,
+                conversation: conversation
+            })
+        });
+
+        const reader = stream.body.getReader();
+        const decoder = new TextDecoder();
+
+        let max = 2048; // We use 2048 max tokens for each LLM answer, therefore this is our upper limit
+        while (max > 0) { // Not a big fan of "while(true)"
+            max--;
+
+            const { value, done } = await reader.read();
+            const text = decoder.decode(value);
+
+            if(done) {
+                generating = false;
+                addMessage("system", temp);
+                temp = "";
+                break;
+            }
+
+            temp = temp + text;
+        }
     }
 </script>
 
