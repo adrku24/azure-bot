@@ -11,92 +11,29 @@
             who: who,
             message: message
         });
+
+        // Force SvelteKit to update and rerender the page.
+        messages = messages;
     }
 
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("user", "That's awesome. I think our users will really appreciate the improvements.");
-    addMessage("bot", "That's awesome. I think our users will really appreciate the improvements.");
+    function sendPrompt() {
+        if(generating) return;
+        generating = true;
+
+        const prompt = document.getElementById("prompt").textContent;
+        if(!prompt) return;
+
+        const conversation = messages.map(message => {
+            return {
+                role: message.who,
+                content: message.content
+            }
+        });
+
+        addMessage("user", prompt);
+
+        document.getElementById("prompt").textContent = "";
+    }
 </script>
 
 <div class="md:border md:border-teal-950 md:rounded md:m-5 md:mx-50">
@@ -111,7 +48,7 @@
                                 <span class="text-sm font-semibold text-gray-900">Sie</span>
                                 <span class="text-sm font-normal text-gray-500">{new Date(message.time).toLocaleTimeString()}</span>
                             </div>
-                            <p class="text-sm font-normal py-2 text-gray-900"> That's awesome. I think our users will really appreciate the improvements.</p>
+                            <p class="text-sm font-normal py-2 text-gray-900">{message.message}</p>
                         </div>
                     </div>
                 </div>
@@ -123,7 +60,7 @@
                                 <span class="text-sm font-normal text-gray-500">{new Date(message.time).toLocaleTimeString()}</span>
                                 <span class="text-sm font-semibold text-gray-900">Chatbot</span>
                             </div>
-                            <p class="text-sm font-normal py-2 text-gray-900"> That's awesome. I think our users will really appreciate the improvements.</p>
+                            <p class="text-sm font-normal py-2 text-gray-900">{message.message}</p>
                         </div>
                     </div>
                     <img class="w-8 h-8 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Jese Bot"/>
@@ -152,7 +89,7 @@
         {/if}
     </div>
 
-    <PromptArea/>
+    <PromptArea sendFunction={sendPrompt} generating={generating}/>
 </div>
 
 <style>
