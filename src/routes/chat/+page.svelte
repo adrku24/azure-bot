@@ -104,7 +104,7 @@
         {#each messages as message}
             {#if message.who === "user"}
                 <div class="flex items-start gap-2.5 my-4 ml-5 mb-1">
-                    <img class="w-8 h-8 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Jese image">
+                    <img class="w-8 h-8 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Jese User"/>
                     <div class="shadow-md rounded mr-5 p-3">
                         <div class="flex flex-col w-full max-w-[320px] leading-1.5">
                             <div class="flex items-center space-x-2 rtl:space-x-reverse">
@@ -126,7 +126,7 @@
                             <p class="text-sm font-normal py-2 text-gray-900"> That's awesome. I think our users will really appreciate the improvements.</p>
                         </div>
                     </div>
-                    <img class="w-8 h-8 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Jese image">
+                    <img class="w-8 h-8 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Jese Bot"/>
                 </div>
             {/if}
         {/each}
@@ -147,7 +147,7 @@
                         </span>
                     </div>
                 </div>
-                <img class="w-8 h-8 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Jese image">
+                <img class="w-8 h-8 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Jese Generating">
             </div>
         {/if}
     </div>
