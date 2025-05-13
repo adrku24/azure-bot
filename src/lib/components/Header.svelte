@@ -15,7 +15,7 @@ c -2.34754,-2.58286 -5.15492,-4.59175 -9.91886,-4.59175 z m -167.41948,0.0112 c 
         </div>
 
         <p class="md:font-bold md:text-2xl sm:text-xl text-lg place-content-center text-center md:col-span-1 md:pt-0 pt-3">
-            <nobr>Fortgeschrittene Themen im Cloud Computing</nobr>
+            Fortgeschrittene Themen im <nobr>Cloud Computing</nobr>
         </p>
     </div>
 </header>

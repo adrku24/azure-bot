@@ -1,6 +1,7 @@
 <script>
     export let sendFunction;
     export let generating;
+    export let num;
 </script>
 
 <div class="w-full align-middle">
@@ -12,7 +13,13 @@
             </div>
 
             <div class="flex w-full items-center justify-end gap-2 px-1 py-1">
-                <button class="mb-1 bg-transparent hover:bg-teal-800 text-teal-700 font-semibold hover:text-white py-1 px-4 border border-teal-500 hover:border-transparent rounded text-sm hover:cursor-pointer">
+                {#if num <= 0}
+                    <button class="text-xs md:text-sm mb-1 bg-transparent hover:bg-teal-800 text-teal-700 font-semibold hover:text-white py-1 px-4 border border-teal-500 hover:border-transparent rounded hover:cursor-pointer">
+                        Beginne eine Konversation
+                    </button>
+                {/if}
+
+                <button class="text-xs md:text-sm mb-1 bg-transparent hover:bg-teal-800 text-teal-700 font-semibold hover:text-white py-1 px-4 border border-teal-500 hover:border-transparent rounded hover:cursor-pointer">
                     Liste alle Accounts
                 </button>
 
