@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { json } from '@sveltejs/kit';
+import {json, text} from '@sveltejs/kit';
 import { AzureChatGPT } from "$lib/api/openai/llm.js";
 
 // Chat assistant configuration
@@ -38,7 +38,13 @@ export async function POST({ request }) {
     const modifiedSystemPrompt = SYSTEM_PROMPT
         .replace("{accounts}", pseudoAccounts);
 
-    const streamIterator = await AzureChatGPT.completion(prompt, modifiedSystemPrompt, messages, true);
+    let streamIterator;
+    try {
+        streamIterator = await AzureChatGPT.completion(prompt, modifiedSystemPrompt, messages, true);
+    } catch (e) {
+        return text(e.error.message, { status: 400 });
+    }
+
     if(streamIterator === null) return json(undefined, { status: 400 });
 
     const encoder = new TextEncoder();
