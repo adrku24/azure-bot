@@ -66,51 +66,53 @@
     }
 </script>
 
-<div class="md:border md:border-teal-950 md:rounded md:m-5 md:mx-50">
+<div class="md:shadow md:shadow-teal-950 md:rounded md:m-5 md:mx-50">
     <div class="message-box mt-2 mx-4">
-        {#if messages.length > 0}
-            {#each messages as message}
-                {#if message.who === "user"}
-                    <div class="flex items-start gap-2.5 my-4 ml-5 mb-1">
-                        <img class="w-8 h-8 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Jese User"/>
-                        <div class="shadow-md rounded mr-5 p-3">
-                            <div class="flex flex-col w-full max-w-[320px] leading-1.5">
-                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <span class="text-sm font-semibold text-gray-900">Sie</span>
-                                    <span class="text-sm font-normal text-gray-500">{new Date(message.time).toLocaleTimeString()}</span>
-                                </div>
-                                <p class="text-sm font-normal py-2 text-gray-900 text-left">{message.message}</p>
-                            </div>
-                        </div>
+        <div class="flex items-start gap-2.5 place-content-end text-end mr-5 mb-1 mt-2">
+            <div class="shadow-md rounded ml-5 p-3">
+                <div class="flex flex-col w-full max-w-[320px] leading-1.5">
+                    <div class="space-x-2 rtl:space-x-reverse">
+                        <span class="text-sm font-semibold text-gray-900">System</span>
                     </div>
-                {:else}
-                    <div class="flex items-start gap-2.5 place-content-end text-end mr-5 mb-1">
-                        <div class="shadow-md rounded ml-5 p-3">
-                            <div class="flex flex-col w-full max-w-[320px] leading-1.5">
-                                <div class="space-x-2 rtl:space-x-reverse">
-                                    <span class="text-sm font-normal text-gray-500">{new Date(message.time).toLocaleTimeString()}</span>
-                                    <span class="text-sm font-semibold text-gray-900">Chatbot</span>
-                                </div>
-                                <p class="text-sm font-normal py-2 text-gray-900 text-left">{message.message}</p>
-                            </div>
-                        </div>
-                        <img class="w-8 h-8 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Jese Bot"/>
+                    <p class="text-sm font-normal py-2 text-gray-900 text-left">Willkommen im Serviceportal für Benutzerkonten. Dieser Assistent begleitet Sie schrittweise und benutzerfreundlich durch den Registrierungsprozess. Zudem ist das System mit den Charakteristika aller verfügbaren Kontomodelle vertraut und steht Ihnen für Anfragen hierzu zur Verfügung.</p>
+                </div>
+            </div>
+            <img class="w-8 h-8 rounded-full" src="/chatbot_system.png" alt="Chat Bot"/>
+        </div>
+
+        {#each messages as message}
+            {#if message.who === "user"}
+                <div class="flex items-start gap-2.5 my-4 ml-5 mb-1">
+                    <div class="w-8 h-8 rounded-full">
+                        <svg width="32" height="32" fill="#000000" viewBox="0 0 256 256">
+                            <path d="M172,120a44,44,0,1,1-44-44A44.05,44.05,0,0,1,172,120Zm60,8A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88.09,88.09,0,0,0-91.47-87.93C77.43,41.89,39.87,81.12,40,128.25a87.65,87.65,0,0,0,22.24,58.16A79.71,79.71,0,0,1,84,165.1a4,4,0,0,1,4.83.32,59.83,59.83,0,0,0,78.28,0,4,4,0,0,1,4.83-.32,79.71,79.71,0,0,1,21.79,21.31A87.62,87.62,0,0,0,216,128Z"></path>
+                        </svg>
                     </div>
-                {/if}
-            {/each}
-        {:else}
-            <div class="flex items-start gap-2.5 place-content-end text-end mr-5 mb-1">
-                <div class="shadow-md rounded ml-5 p-3">
-                    <div class="flex flex-col w-full max-w-[320px] leading-1.5">
-                        <div class="space-x-2 rtl:space-x-reverse">
-                            <span class="text-sm font-semibold text-gray-900">System</span>
+                    <div class="shadow-md rounded mr-5 p-3">
+                        <div class="flex flex-col w-full max-w-[320px] leading-1.5">
+                            <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                                <span class="text-sm font-semibold text-gray-900">Sie</span>
+                                <span class="text-sm font-normal text-gray-500">{new Date(message.time).toLocaleTimeString()}</span>
+                            </div>
+                            <p class="text-sm font-normal py-2 text-gray-900 text-left">{message.message}</p>
                         </div>
-                        <p class="text-sm font-normal py-2 text-gray-900 text-left">Willkommen im Serviceportal für Benutzerkonten. Dieser Assistent begleitet Sie schrittweise und benutzerfreundlich durch den Registrierungsprozess. Zudem ist das System mit den Charakteristika aller verfügbaren Kontomodelle vertraut und steht Ihnen für Anfragen hierzu zur Verfügung.</p>
                     </div>
                 </div>
-                <img class="w-8 h-8 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Jese Bot"/>
-            </div>
-        {/if}
+            {:else}
+                <div class="flex items-start gap-2.5 place-content-end text-end mr-5 mb-1">
+                    <div class="shadow-md rounded ml-5 p-3">
+                        <div class="flex flex-col w-full max-w-[320px] leading-1.5">
+                            <div class="space-x-2 rtl:space-x-reverse">
+                                <span class="text-sm font-normal text-gray-500">{new Date(message.time).toLocaleTimeString()}</span>
+                                <span class="text-sm font-semibold text-gray-900">Chatbot</span>
+                            </div>
+                            <p class="text-sm font-normal py-2 text-gray-900 text-left">{message.message}</p>
+                        </div>
+                    </div>
+                    <img class="w-8 h-8 rounded-full" src="/chatbot.png" alt="Chat Bot"/>
+                </div>
+            {/if}
+        {/each}
 
         {#if generating}
             <div class="flex items-start gap-2.5 place-content-end text-end mr-5 mb-1">
@@ -128,7 +130,7 @@
                         </span>
                     </div>
                 </div>
-                <img class="w-8 h-8 rounded-full" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Jese Generating">
+                <img class="w-8 h-8 rounded-full" src="/chatbot.png" alt="Chat Bot"/>
             </div>
         {/if}
     </div>

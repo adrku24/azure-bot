@@ -4,8 +4,8 @@
     export let num;
 </script>
 
-<div class="w-full align-middle">
-    <div class="bg-white border border-black rounded m-2 mt-2">
+<div class="w-full align-middle pb-0.5">
+    <div class="bg-white shadow shadow-teal-950 rounded m-2 mt-2">
         <div class="flex w-full flex-col overflow-hidden bg-surface-alt text-on-surface has-[p:focus]:outline-2 has-[p:focus]:rounded has-[p:focus]:outline-offset-2 has-[p:focus]:outline-primary dark:border-outline-dark dark:bg-surface-dark-alt dark:text-on-surface-dark dark:has-[p:focus]:outline-primary-dark">
             <div class="p-1">
                 <p id="promptLabel" class="pb-0.5 pl-1 text-sm font-bold text-on-surface opacity-60 dark:text-on-surface-dark">Prompt</p>
@@ -14,7 +14,9 @@
 
             <div class="flex w-full items-center justify-end gap-2 px-1 py-1">
                 {#if num <= 0}
-                    <button class="text-xs md:text-sm mb-1 bg-transparent hover:bg-teal-800 text-teal-700 font-semibold hover:text-white py-1 px-4 border border-teal-500 hover:border-transparent rounded hover:cursor-pointer">
+                    <button class="text-xs md:text-sm mb-1 bg-transparent hover:bg-teal-800 text-teal-700 font-semibold hover:text-white py-1 px-4 border border-teal-500 hover:border-transparent rounded hover:cursor-pointer" onclick={
+                        () => document.getElementById("prompt").textContent = "Hallo"
+                    }>
                         Beginne eine Konversation
                     </button>
                 {/if}
