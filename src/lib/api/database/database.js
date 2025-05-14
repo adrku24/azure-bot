@@ -59,7 +59,7 @@ class DatabaseConnection {
                 "postal_code TEXT," +
                 "country TEXT," +
                 "address_type TEXT," +
-                "FOREIGN KEY (user_id) REFERENCES azure_bot_users(id) ON DELETE CASCADE" +
+                "FOREIGN KEY (user_id) REFERENCES azure_bot_user(id) ON DELETE CASCADE" +
             ");"
         );
 
@@ -71,7 +71,7 @@ class DatabaseConnection {
                 "user_id INTEGER NOT NULL," +
                 "phone_number TEXT NOT NULL," +
                 "phone_type TEXT," +
-                "FOREIGN KEY (user_id) REFERENCES azure_bot_users(id) ON DELETE CASCADE" +
+                "FOREIGN KEY (user_id) REFERENCES azure_bot_user(id) ON DELETE CASCADE" +
             ");"
         );
 
@@ -82,7 +82,7 @@ class DatabaseConnection {
         connection.query("CREATE TABLE IF NOT EXISTS azure_bot_access (" +
                 "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
                 "access_token BINARY(16) NOT NULL," + // BINARY(16): 16 bits required to form a UUID
-                "expiration LONG NOT NULL," +
+                "expiration LONG NOT NULL" +
             ");"
         );
     }
