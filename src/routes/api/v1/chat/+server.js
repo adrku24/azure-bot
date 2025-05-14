@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import {json, text} from '@sveltejs/kit';
 import { AzureChatGPT } from "$lib/api/openai/llm.js";
+import {JsonExtractor} from "$lib/api/jsonExtractor.js";
+import {JsonUserMatcher} from "$lib/api/user/jsonUserMatcher.js";
 
 // Chat assistant configuration
 const SYSTEM_PROMPT = fs.readFileSync("llm/system/system_prompt.txt", { encoding: 'utf8' });
@@ -47,6 +49,7 @@ export async function POST({ request }) {
 
     if(streamIterator === null) return json(undefined, { status: 400 });
 
+    let middleMan = "";
     const encoder = new TextEncoder();
     const readableStream = new ReadableStream({
         async start(controller) {
@@ -54,7 +57,19 @@ export async function POST({ request }) {
                 for await (const chunk of streamIterator) {
                     const content = chunk.choices[0]?.delta?.content;
                     if (content) {
+                        middleMan = middleMan + content;
                         controller.enqueue(encoder.encode(content));
+                    } else {
+                        const json = JsonExtractor.extract(middleMan);
+                        for(let i = 0; i < json.length; i++) {
+                            const match = json[i];
+                            console.dir(match);
+                            if(JsonUserMatcher.matches(match)) {
+                                // TODO: add to database
+                                console.dir(match);
+                                console.log("MATCHES!");
+                            }
+                        }
                     }
                 }
             } catch (error) {

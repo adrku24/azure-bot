@@ -37,8 +37,6 @@ class LLM {
             "content": user
         });
 
-        console.dir(conversation);
-
         return this._client.chat.completions.create({
             messages: conversation,
             max_tokens: 2048,
