@@ -3,6 +3,10 @@ import {json, text} from '@sveltejs/kit';
 import { AzureChatGPT } from "$lib/api/openai/llm.js";
 import {JsonExtractor} from "$lib/api/jsonExtractor.js";
 import {JsonUserMatcher} from "$lib/api/user/jsonUserMatcher.js";
+import {UserAddress} from "$lib/api/user/entity/userAddress.js";
+import {UserPhone} from "$lib/api/user/entity/userPhone.js";
+import {User} from "$lib/api/user/entity/user.js";
+import {UserService} from "$lib/api/user/service/userService.js";
 
 // Chat assistant configuration
 const SYSTEM_PROMPT = fs.readFileSync("llm/system/system_prompt.txt", { encoding: 'utf8' });
@@ -54,6 +58,8 @@ export async function POST({ request }) {
     const readableStream = new ReadableStream({
         async start(controller) {
             try {
+                let inserted = false;
+
                 for await (const chunk of streamIterator) {
                     const content = chunk.choices[0]?.delta?.content;
                     if (content) {
@@ -61,13 +67,39 @@ export async function POST({ request }) {
                         controller.enqueue(encoder.encode(content));
                     } else {
                         const json = JsonExtractor.extract(middleMan);
-                        for(let i = 0; i < json.length; i++) {
+                        for(let i = 0; i < json.length && !inserted; i++) {
                             const match = json[i];
-                            console.dir(match);
                             if(JsonUserMatcher.matches(match)) {
-                                // TODO: add to database
-                                console.dir(match);
-                                console.log("MATCHES!");
+                                const jsonAddress = match["address"];
+
+                                const address = new UserAddress(
+                                    null,
+                                    jsonAddress["street_address"],
+                                    jsonAddress["city"],
+                                    jsonAddress["state_province"],
+                                    jsonAddress["postal_code"],
+                                    jsonAddress["country"],
+                                    jsonAddress["address_type"]
+                                );
+
+                                const jsonPhone = match["phone"];
+                                const phone = new UserPhone(
+                                    null,
+                                    jsonPhone["phone_number"],
+                                    jsonPhone["phone_type"]
+                                );
+
+                                const user = new User(
+                                    null,
+                                    match["first_name"],
+                                    match["last_name"],
+                                    match["birthday"],
+                                    address,
+                                    match["email"],
+                                    phone
+                                );
+
+                                await UserService.insertUser(user);
                             }
                         }
                     }
