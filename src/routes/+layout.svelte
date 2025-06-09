@@ -1,9 +1,9 @@
 <script>
     import Header from "$lib/components/Header.svelte";
 
-    let { children } = $props();
+    let { data, children } = $props();
     import "../app.css";
 </script>
 
-<Header/>
+<Header renderNavigationIntoDOM={data.renderExtraHeader}/>
 {@render children()}

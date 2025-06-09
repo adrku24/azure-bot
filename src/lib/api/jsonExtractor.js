@@ -1,7 +1,7 @@
 export class JsonExtractor {
 
     static extract(content) {
-        const regex = /{.*}/gm;
+        const regex = /\{.*}/gms;
         const matches = [];
 
         let m;

@@ -36,7 +36,8 @@
         const stream = await fetch("/api/v1/chat", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Cookies": document.cookies
             },
             body: JSON.stringify({
                 prompt: prompt,
@@ -66,7 +67,7 @@
     }
 </script>
 
-<div class="md:shadow md:shadow-teal-950 md:rounded md:m-5 md:mx-50">
+<div class="md:shadow md:shadow-teal-950 md:rounded md:mt-10 md:mx-50 mt-10">
     <div class="message-box mt-2 mx-4">
         <div class="flex items-start gap-2.5 place-content-end text-end mr-5 mb-1 mt-2">
             <div class="shadow-md rounded ml-5 p-3">

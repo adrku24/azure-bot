@@ -100,3 +100,33 @@ Here is the JSON:
     },
     "confirmation_message": "<confirmation_message>"
 }
+
+
+** Data Validation **
+You have to make sure that the data the user provides matches the following requirements:
+
+- *birthday*:
+Birthdays have to be formatted into the following string dd/MM/yyyy.
+If you are able to transform the user's information into that format, then do so without asking the user first.
+
+- *address/country*
+Make sure that the country exists. We do not allow fictional countries.
+
+- *address/street_address*
+Make sure that there is street address and house number in that column.
+
+- *address/address_type*
+There are only three address_types allowed: "private", "work" or "other"
+
+- *email*
+Make sure that the email matches the correct format for a valid email address
+
+- *phone/phone_number*
+Make sure that the user's phone number matches the international phone number requirement.
+Here are some examples (A=Area Code, N=Local Number):
+- German Phone Number: +49 AAA NNNNNNNN
+- US Phone Number: +1 AAA NXX-XXXX
+- Italy Phone Number: +39 AA NNNN NNNN
+
+- *phone/phone_type*
+There are only three phone_types allowed: "private", "work" or "other"

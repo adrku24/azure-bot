@@ -7,11 +7,17 @@ import {UserAddress} from "$lib/api/user/entity/userAddress.js";
 import {UserPhone} from "$lib/api/user/entity/userPhone.js";
 import {User} from "$lib/api/user/entity/user.js";
 import {UserService} from "$lib/api/user/service/userService.js";
+import {Unlock} from "$lib/api/unlock/unlock.js";
 
 // Chat assistant configuration
 const SYSTEM_PROMPT = fs.readFileSync("llm/system/system_prompt.txt", { encoding: 'utf8' });
 
-export async function POST({ request }) {
+export async function POST({ request, cookies }) {
+    const accessToken = cookies.get("access_token");
+    if(!accessToken || !(await Unlock.isAccessTokenStillValid(accessToken))) {
+        return text("No Permission.", { status: 403 });
+    }
+
     const { prompt, conversation } = await request.json();
 
     if(!prompt) {
@@ -34,15 +40,7 @@ export async function POST({ request }) {
         }
     }
 
-    // TODO: add accounts to system prompt
-    let pseudoAccounts = JSON.stringify({
-        first_name: "Robert",
-        last_name: "Burgers",
-        email: "robert.burgers@gmail.com"
-    });
-
-    const modifiedSystemPrompt = SYSTEM_PROMPT
-        .replace("{accounts}", pseudoAccounts);
+    const modifiedSystemPrompt = SYSTEM_PROMPT.replace("{accounts}", JSON.stringify(await UserService.prepareForSystemPrompt()));
 
     let streamIterator;
     try {
@@ -66,9 +64,11 @@ export async function POST({ request }) {
                         middleMan = middleMan + content;
                         controller.enqueue(encoder.encode(content));
                     } else {
+                        console.log(middleMan);
                         const json = JsonExtractor.extract(middleMan);
                         for(let i = 0; i < json.length && !inserted; i++) {
                             const match = json[i];
+                            console.log(`Found JSON match: ${match}`)
                             if(JsonUserMatcher.matches(match)) {
                                 const jsonAddress = match["address"];
 
@@ -99,6 +99,8 @@ export async function POST({ request }) {
                                     phone
                                 );
 
+                                console.log("NEW USER:");
+                                console.dir(user);
                                 await UserService.insertUser(user);
                             }
                         }

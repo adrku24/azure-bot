@@ -1,3 +1,7 @@
+<script>
+    export let renderNavigationIntoDOM = false;
+</script>
+
 <header class="shadow-sm">
     <div class="md:grid md:grid-cols-3">
         <div class="p-2 md:col-span-1">
@@ -19,3 +23,17 @@ c -2.34754,-2.58286 -5.15492,-4.59175 -9.91886,-4.59175 z m -167.41948,0.0112 c 
         </p>
     </div>
 </header>
+
+{#if renderNavigationIntoDOM}
+    <div class="flex h-6">
+        <div class="m-auto mt-2">
+            <a data-sveltekit-reload href="/chat" class="mr-6 inline-flex items-center justify-center px-3 py-1 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" data-rounded="rounded-md" data-primary="blue-600" data-primary-reset={"{}"}>
+                Chat
+            </a>
+
+            <a data-sveltekit-reload href="/admin" class="inline-flex items-center justify-center px-3 py-1 text-base font-medium leading-6 text-white whitespace-no-wrap bg-blue-600 border border-blue-700 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" data-rounded="rounded-md" data-primary="blue-600" data-primary-reset={"{}"}>
+                Admin
+            </a>
+        </div>
+    </div>
+{/if}

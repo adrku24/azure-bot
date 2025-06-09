@@ -1,0 +1,10 @@
+Hier sind meine Daten:
+
+Vorname: Michael
+Nachname: Clear
+Geburtstag: März 17, 1957
+Telefonnummer: +1 567-644-4378 (Privat)
+Addresse: 2934 Carriage Lane Celina, OH 45822 (Privat)
+E-Mail: m.clear@gmail.com
+
+Bitte erstelle einen Account für mich.

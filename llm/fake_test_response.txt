@@ -1,0 +1,34 @@
+Perfekt! Ich werde jetzt Ihr Konto mit den folgenden Informationen erstellen:
+
+- Vorname: Michael
+- Nachname: Clear
+- Geburtstag: 17/03/1957
+- Telefonnummer: +1 567-644-4378 (Privat)
+- Adresse: 2934 Carriage Lane, Celina, OH 45822 (Privat)
+- E-Mail: m.clear@gmail.com
+
+Hier ist die Bestätigung:
+
+```json
+{
+    "first_name": "Michael",
+    "last_name": "Clear",
+    "birthday": "17/03/1957",
+    "address": {
+        "street_address": "2934 Carriage Lane",
+        "city": "Celina",
+        "state_province": "OH",
+        "postal_code": "45822",
+        "country": "USA",
+        "address_type": "private"
+    },
+    "email": "m.clear@gmail.com",
+    "phone": {
+        "phone_number": "+1 567-644-4378",
+        "phone_type": "private"
+    },
+    "confirmation_message": "Ich habe alle Informationen gesammelt! Ihr Konto wurde erfolgreich erstellt."
+}
+```
+
+Vielen Dank, dass Sie sich angemeldet haben! Wenn Sie weitere Fragen haben oder Hilfe benötigen, lassen Sie es mich bitte wissen.
