@@ -64,11 +64,9 @@ export async function POST({ request, cookies }) {
                         middleMan = middleMan + content;
                         controller.enqueue(encoder.encode(content));
                     } else {
-                        console.log(middleMan);
                         const json = JsonExtractor.extract(middleMan);
                         for(let i = 0; i < json.length && !inserted; i++) {
                             const match = json[i];
-                            console.log(`Found JSON match: ${match}`)
                             if(JsonUserMatcher.matches(match)) {
                                 const jsonAddress = match["address"];
 
@@ -99,8 +97,6 @@ export async function POST({ request, cookies }) {
                                     phone
                                 );
 
-                                console.log("NEW USER:");
-                                console.dir(user);
                                 await UserService.insertUser(user);
                             }
                         }

@@ -40,9 +40,6 @@
                 }
             });
         }
-
-        console.log("FILTER: " + filter);
-        console.log(showing);
     }
 
     onMount(async () => {

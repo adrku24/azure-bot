@@ -1,15 +1,18 @@
 <script>
     import PromptArea from "$lib/components/PromptArea.svelte";
+    import showdown from "showdown";
 
     export let messages = [];
     export let generating = false;
     export let temp = "";
 
     function addMessage(who, message) {
+        const converter = new showdown.Converter(), html = converter.makeHtml(message);
+
         messages.push({
             time: Date.now(),
             who: who,
-            message: message
+            message: html
         });
 
         // Force SvelteKit to update and rerender the page.
@@ -60,6 +63,10 @@
                 addMessage("system", temp);
                 temp = "";
                 break;
+            } else {
+                if(text.startsWith("!>0<!")) {
+                    temp = text.replace("!>0<!", "");
+                }
             }
 
             temp = temp + text;
@@ -95,7 +102,7 @@
                                 <span class="text-sm font-semibold text-gray-900">Sie</span>
                                 <span class="text-sm font-normal text-gray-500">{new Date(message.time).toLocaleTimeString()}</span>
                             </div>
-                            <p class="text-sm font-normal py-2 text-gray-900 text-left">{message.message}</p>
+                            <div class="text-sm font-normal py-2 text-gray-900 text-left">{@html message.message}</div>
                         </div>
                     </div>
                 </div>
@@ -107,7 +114,7 @@
                                 <span class="text-sm font-normal text-gray-500">{new Date(message.time).toLocaleTimeString()}</span>
                                 <span class="text-sm font-semibold text-gray-900">Chatbot</span>
                             </div>
-                            <p class="text-sm font-normal py-2 text-gray-900 text-left">{message.message}</p>
+                            <div class="text-sm font-normal py-2 text-gray-900 text-left">{@html message.message}</div>
                         </div>
                     </div>
                     <img class="w-8 h-8 rounded-full" src="/chatbot.png" alt="Chat Bot"/>
