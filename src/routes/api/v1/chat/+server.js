@@ -98,6 +98,7 @@ export async function POST({ request, cookies }) {
                                 );
 
                                 await UserService.insertUser(user);
+                                controller.enqueue(encoder.encode("!>0<!" + match.confirmation_message));
                             }
                         }
                     }
