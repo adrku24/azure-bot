@@ -18,7 +18,7 @@ class DatabaseConnection {
             password: password,
 
             database: databaseName,
-            // ssl: {}
+            ssl: {}
         };
     }
 
@@ -94,7 +94,7 @@ class DatabaseConnection {
         await connection.query("CREATE TABLE IF NOT EXISTS azure_bot_llm_stats (" +
             "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
             "timestamp LONG NOT NULL," +
-            "text VARCHAR(2048) NOT NULL" +
+            "text TEXT NOT NULL" +
             ");"
         );
 
