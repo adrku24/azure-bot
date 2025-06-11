@@ -19,6 +19,7 @@
     "@tailwindcss/vite": "^4.0.14",
     "autoprefixer": "^10.4.20",
     "dotenv": "^16.5.0",
+    "mysql2": "^3.14.1",
     "openai": "latest",
     "postcss": "^8.5.1",
     "svelte": "^5.15.0",
@@ -30,7 +31,6 @@
   },
   "dependencies": {
     "jspdf": "^3.0.1",
-    "mysql2": "^3.14.1",
     "showdown": "^2.1.0"
   }
 }
