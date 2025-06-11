@@ -3,6 +3,7 @@
     import { onMount } from "svelte";
     import CloudLoadingAnimation from "$lib/components/CloudLoadingAnimation.svelte";
 
+    let initialLoading = $state(true);
     let reloading = $state(false);
     let users = $state([]);
     let showing = $state([]);
@@ -44,6 +45,7 @@
 
     onMount(async () => {
         await reload();
+        initialLoading = false;
     });
 </script>
 
@@ -69,7 +71,7 @@
             </button>
         </div>
 
-        {#if reloading}
+        {#if reloading || initialLoading}
             <div class="flex mt-10">
                 <div class="mx-auto">
                     <CloudLoadingAnimation/>
