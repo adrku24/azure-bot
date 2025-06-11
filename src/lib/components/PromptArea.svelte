@@ -21,7 +21,9 @@
                     </button>
                 {/if}
 
-                <button class="text-xs md:text-sm mb-1 bg-transparent hover:bg-teal-800 text-teal-700 font-semibold hover:text-white py-1 px-4 border border-teal-500 hover:border-transparent rounded hover:cursor-pointer">
+                <button class="text-xs md:text-sm mb-1 bg-transparent hover:bg-teal-800 text-teal-700 font-semibold hover:text-white py-1 px-4 border border-teal-500 hover:border-transparent rounded hover:cursor-pointer" onclick={
+                    () => document.getElementById("prompt").textContent = "Liste alle Benutzeraccounts auf."
+                }>
                     Liste alle Accounts
                 </button>
 
