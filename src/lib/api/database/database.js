@@ -88,6 +88,16 @@ class DatabaseConnection {
             ");"
         );
 
+        /*
+            Statistics (key, value)
+         */
+        await connection.query("CREATE TABLE IF NOT EXISTS azure_bot_llm_stats (" +
+            "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
+            "timestamp LONG NOT NULL," +
+            "text VARCHAR(2048) NOT NULL" +
+            ");"
+        );
+
         connection.close();
         console.log("Tables created.");
     }

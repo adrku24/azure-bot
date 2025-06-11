@@ -2,7 +2,7 @@
     export let renderNavigationIntoDOM = false;
 </script>
 
-<header class="shadow-sm">
+<header class="shadow-sm ignorePDF">
     <div class="md:grid md:grid-cols-3">
         <div class="p-2 md:col-span-1">
             <div class="flex">

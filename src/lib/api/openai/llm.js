@@ -2,6 +2,7 @@ import { AzureOpenAI } from "openai";
 
 // Environment initialisation
 import dotenv from "dotenv";
+import {LLMStats} from "$lib/api/statistics/llmStats.js";
 dotenv.config();
 
 class LLM {
@@ -20,7 +21,7 @@ class LLM {
         this._client = new AzureOpenAI(options);
     }
 
-    completion(user, system, conversation = [], use_streaming = true) {
+    async completion(user, system, conversation = [], use_streaming = true) {
         if (user === undefined || user === null) {
             return null;
         }
@@ -36,6 +37,8 @@ class LLM {
             "role": "user",
             "content": user
         });
+
+        await LLMStats.insertStatistic(user);
 
         return this._client.chat.completions.create({
             messages: conversation,

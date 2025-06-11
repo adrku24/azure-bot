@@ -51,6 +51,14 @@
     <div class="mt-20 mx-auto mb-auto">
         <div class="flex place-content-center mb-5">
             <div class="w-full max-w-sm min-w-[200px]">
+                <a href="/admin/stats" class="w-full text-right flex hover:text-blue-500 underline hover:cursor-pointer">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-1 mr-1">
+                        <path d="m10 18 3-3-3-3"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                        <path d="M4 11V4a2 2 0 0 1 2-2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h7"/>
+                    </svg>
+                    Statistiken
+                </a>
+
                 <input oninput={() => updateShowing()} id="filter" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" placeholder="Suche">
             </div>
 
