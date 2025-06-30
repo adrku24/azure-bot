@@ -1,4 +1,4 @@
-import { databaseConnection, DatabaseConnection } from "./lib/api/database/database.js";
+import { databaseConnection } from "./lib/api/database/database.js";
 import { building } from "$app/environment";
 import {Unlock} from "$lib/api/unlock/unlock.js";
 
@@ -14,7 +14,7 @@ export async function handle({ event, resolve }) {
         return new Response(null, { status: 204 });
     }
 
-    if (url.pathname.startsWith('/api')) {
+    if (url.pathname.startsWith('/papi')) {
         return resolve(event);
     }
 
