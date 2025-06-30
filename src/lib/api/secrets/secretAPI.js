@@ -2,6 +2,7 @@ import { SecretClient } from "@azure/keyvault-secrets";
 import { ClientSecretCredential } from "@azure/identity";
 
 import dotenv from "dotenv";
+import {building} from "$app/environment";
 dotenv.config();
 
 class SecretAPI {
@@ -19,5 +20,19 @@ class SecretAPI {
     }
 }
 
-const SECRETS = new SecretAPI();
+class BuildSecretAPI {
+    constructor() {}
+
+    async getSecret(name) {
+        return "";
+    }
+}
+
+let SECRETS;
+if(!building) {
+    SECRETS = new SecretAPI();
+} else {
+    SECRETS = new BuildSecretAPI();
+}
+
 export { SECRETS };
