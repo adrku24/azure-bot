@@ -1,8 +1,10 @@
 import { AzureOpenAI } from "openai";
 
 // Environment initialisation
+import { LLMStats } from "$lib/api/statistics/llmStats.js";
+import { building } from "$app/environment";
+
 import dotenv from "dotenv";
-import {LLMStats} from "$lib/api/statistics/llmStats.js";
 dotenv.config();
 
 class LLM {
@@ -11,14 +13,16 @@ class LLM {
     _client;
 
     constructor() {
-        const apiKey = process.env.AZURE_OPENAI_API_KEY;
-        const apiVersion = process.env.AZURE_OPENAI_API_VERSION;
-        const endpoint = process.env.AZURE_OPENAI_API_ENDPOINT;
-        const deployment = process.env.AZURE_OPENAI_API_DEPLOYMENT;
-        const options = { endpoint, apiKey, deployment, apiVersion }
+        if(!building) {
+            const apiKey = process.env.AZURE_OPENAI_API_KEY;
+            const apiVersion = process.env.AZURE_OPENAI_API_VERSION;
+            const endpoint = process.env.AZURE_OPENAI_API_ENDPOINT;
+            const deployment = process.env.AZURE_OPENAI_API_DEPLOYMENT;
+            const options = {endpoint, apiKey, deployment, apiVersion}
 
-        this._model = process.env.AZURE_OPENAI_API_MODEL_NAME;
-        this._client = new AzureOpenAI(options);
+            this._model = process.env.AZURE_OPENAI_API_MODEL_NAME;
+            this._client = new AzureOpenAI(options);
+        }
     }
 
     async completion(user, system, conversation = [], use_streaming = true) {
