@@ -3,16 +3,17 @@ import { Unlock } from "$lib/api/unlock/unlock.js";
 import { json, text } from "@sveltejs/kit";
 // DEBUG: import fs from "node:fs";
 import dotenv from "dotenv";
+import {SECRETS} from "$lib/api/secrets/secretAPI.js";
 dotenv.config();
-
-const subscriptionKey = process.env.AZURE_SPEECH_KEY;
-const serviceRegion = process.env.AZURE_SPEECH_REGION;
 
 export async function POST({ request, cookies }) {
     const accessToken = cookies.get("access_token");
     if(!accessToken || !(await Unlock.isAccessTokenStillValid(accessToken))) {
         return text("No Permission.", { status: 403 });
     }
+
+    const subscriptionKey = await SECRETS.getSecret("azure-speech-key");
+    const serviceRegion = process.env.AZURE_SPEECH_REGION;
 
     let recognizer = null;
 

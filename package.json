@@ -30,6 +30,7 @@
     "vite": "^6.0.9"
   },
   "dependencies": {
+    "@azure/keyvault-secrets": "^4.10.0",
     "jspdf": "^3.0.1",
     "microsoft-cognitiveservices-speech-sdk": "^1.44.1",
     "showdown": "^2.1.0"

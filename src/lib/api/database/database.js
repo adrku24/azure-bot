@@ -1,6 +1,7 @@
 import mysql from "mysql2/promise";
 import { building } from '$app/environment';
 import dotenv from "dotenv";
+import {SECRETS} from "$lib/api/secrets/secretAPI.js";
 dotenv.config();
 
 class DatabaseConnection {
@@ -108,8 +109,8 @@ if(!building) { // Ignore database connection setup when building
     databaseConnection = new DatabaseConnection(
         process.env.AZURE_MYSQL_HOST,
         process.env.AZURE_MYSQL_PORT,
-        process.env.AZURE_MYSQL_USERNAME,
-        process.env.AZURE_MYSQL_PASSWORD,
+        await SECRETS.getSecret("azure-mysql-user"),
+        await SECRETS.getSecret("azure-mysql-password"),
         process.env.AZURE_MYSQL_DATABASE_NAME
     );
 } else {

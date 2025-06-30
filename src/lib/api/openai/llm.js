@@ -5,6 +5,7 @@ import { LLMStats } from "$lib/api/statistics/llmStats.js";
 import { building } from "$app/environment";
 
 import dotenv from "dotenv";
+import {SECRETS} from "$lib/api/secrets/secretAPI.js";
 dotenv.config();
 
 class LLM {
@@ -12,8 +13,8 @@ class LLM {
     _model;
     _client;
 
-    constructor() {
-        const apiKey = process.env.AZURE_OPENAI_API_KEY;
+    async constructor() {
+        const apiKey = await SECRETS.getSecret("azure-openapi-key");
         const apiVersion = process.env.AZURE_OPENAI_API_VERSION;
         const endpoint = process.env.AZURE_OPENAI_API_ENDPOINT;
         const deployment = process.env.AZURE_OPENAI_API_DEPLOYMENT;
@@ -55,6 +56,6 @@ class LLM {
 
 let AzureChatGPT = null;
 if(!building) {
-    AzureChatGPT = new LLM();
+    AzureChatGPT = await new LLM();
 }
 export { AzureChatGPT };
