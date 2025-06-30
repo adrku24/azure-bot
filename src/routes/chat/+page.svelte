@@ -59,14 +59,15 @@
             const text = decoder.decode(value);
 
             if(done) {
+                if(temp.includes("!>0<!")) {
+                    const split = temp.split("!>0<!");
+                    temp = split[split.length - 1];
+                }
+
                 generating = false;
                 addMessage("system", temp);
                 temp = "";
                 break;
-            } else {
-                if(text.startsWith("!>0<!")) {
-                    temp = text.replace("!>0<!", "");
-                }
             }
 
             temp = temp + text;
