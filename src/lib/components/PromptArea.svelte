@@ -70,7 +70,7 @@
         console.log('Generated WAV Blob size:', audioBlob.size, 'type:', audioBlob.type);
 
         try {
-            const response = await fetch('/api/v1/transcribe', {
+            const response = await fetch('/papi/v1/transcribe', {
                 method: 'POST',
                 headers: {
                     'Content-Type': audioBlob.type

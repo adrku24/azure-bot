@@ -12,7 +12,7 @@
         if(reloading) return;
 
         reloading = true;
-        users = await fetch("/api/v1/user", {
+        users = await fetch("/papi/v1/user", {
             method: "GET",
             headers: {"Cookies": document.cookies}
         }).then(async (response) => await response.json());

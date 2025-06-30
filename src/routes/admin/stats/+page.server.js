@@ -5,7 +5,7 @@ export async function load({ fetch, locals }) {
         throw redirect(303, '/');
     }
 
-    let stats = await fetch("/api/v1/stats", {
+    let stats = await fetch("/papi/v1/stats", {
         method: "GET"
     }).then(async (response) => await response.json());
 

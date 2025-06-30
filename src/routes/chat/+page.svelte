@@ -36,7 +36,7 @@
         addMessage("user", prompt);
         document.getElementById("prompt").textContent = "";
 
-        const stream = await fetch("/api/v1/chat", {
+        const stream = await fetch("/papi/v1/chat", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

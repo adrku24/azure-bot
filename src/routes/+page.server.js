@@ -12,7 +12,7 @@ export const actions = {
         const formData = await request.formData();
         const password = formData.get("password");
 
-        const response = await fetch("/api/v1/unlock", {
+        const response = await fetch("/papi/v1/unlock", {
             method: "POST",
             body: JSON.stringify({
                 password: password
