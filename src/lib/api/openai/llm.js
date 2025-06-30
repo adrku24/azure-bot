@@ -13,16 +13,14 @@ class LLM {
     _client;
 
     constructor() {
-        if(!building) {
-            const apiKey = process.env.AZURE_OPENAI_API_KEY;
-            const apiVersion = process.env.AZURE_OPENAI_API_VERSION;
-            const endpoint = process.env.AZURE_OPENAI_API_ENDPOINT;
-            const deployment = process.env.AZURE_OPENAI_API_DEPLOYMENT;
-            const options = {endpoint, apiKey, deployment, apiVersion}
+        const apiKey = process.env.AZURE_OPENAI_API_KEY;
+        const apiVersion = process.env.AZURE_OPENAI_API_VERSION;
+        const endpoint = process.env.AZURE_OPENAI_API_ENDPOINT;
+        const deployment = process.env.AZURE_OPENAI_API_DEPLOYMENT;
+        const options = {endpoint, apiKey, deployment, apiVersion}
 
-            this._model = process.env.AZURE_OPENAI_API_MODEL_NAME;
-            this._client = new AzureOpenAI(options);
-        }
+        this._model = process.env.AZURE_OPENAI_API_MODEL_NAME;
+        this._client = new AzureOpenAI(options);
     }
 
     async completion(user, system, conversation = [], use_streaming = true) {
@@ -55,4 +53,8 @@ class LLM {
     }
 }
 
-export let AzureChatGPT = new LLM();
+let AzureChatGPT = null;
+if(!building) {
+    AzureChatGPT = new LLM();
+}
+export { AzureChatGPT };
