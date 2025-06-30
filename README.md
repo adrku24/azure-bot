@@ -1,47 +1,104 @@
-# Svelte + Vite
+# Azure Chatbot - Dokumentation
 
-This template should help get you started developing with Svelte in Vite.
+## Installationsanleitung
 
-## Recommended IDE Setup
+### 1. Azure Gruppe erstellen
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+Dieser Schritt ist optional. Es ist jedoch einfacherer Services einem Projekt zuzuordnen, wenn sie einer Gruppe angehören.
 
-## Need an official Svelte framework?
+### 2. Azure "Static Web App" erstellen
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+- Fügen Sie ihren GitHub Account auf der Webseite hinzu
+- Clone ggf. dieses Projekt
+- Während des "Erstellens" der Static Web App wähle Ihr Repository mit dem Code aus diesem Projekt aus
+- Klicke auf "Ja", falls Sie gefragt werden, ob Azure einen Storage Account für Mass Storage hinzufügen soll. Dort wird der "Static"-Inhalt, wie bspw. Bilder in Buckets gespeichert.
+- Wählen Sie das Standard Tier aus, um anschließend den Key Vault verwenden zu können.
+- Anschließend aktivieren Sie über "Settings" -> "Identitiy" Ihre App über Microsoft Entra ID (Die Option "Status" auf "On" stellen unter "System assigned")
 
-## Technical considerations
+### 3. Datenbank
 
-**Why use this over SvelteKit?**
+- Erstellen Sie einen "Azure Database for MySQL flexible server" Service.
+- Wählen Sie ihre Wunschregion und wieviel Speicher die Datenbank auf wie vielen Nodes die Datenbank haben soll
+- Wählen Sie einen Benutzernamen und ein Passwort (Speichern Sie sich dieses ab)
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+### 4. Azure Key Vault
 
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+- Erstellen Sie einen Azure Key Vault
+- Geben Sie sich anschließend über das "Access control" (IAM) - Tool vollen Zugriff auf den Key Vault, um Daten hochzuladen.
+- Fügen Sie dafür einfach sich selbst als "Key Vault Administrator" hinzu
+- Fügen Sie anschließend Ihre App als "Reader" hinzu (Diese Option ist nur dann aktiv, wenn Sie Microsoft Entra ID aktiviert haben)
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+### 5. KI
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+- Erstellen Sie ein neues KI-Projekt unter [ai.azure.com](ai.azure.com).
+- Deployen Sie ein x-beliebiges Chat-Modell.
+- Notieren Sie sich: API_KEY, API_VERSION, API_ENDPOINT, MODEL_NAME und API_DEPLOYMENT
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+### 6. Speech 2 Text
 
-**Why include `.vscode/extensions.json`?**
+- Zurück zu [portal.azure.com](portal.azure.com)
+- Erstellen Sie ein "Speech Service"
+- Notieren Sie sich einen der beiden API-KEYs
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+### 7. Fügen Sie Ihre Daten in die Static Web App ein
+- Gehen Sie in "Settings" -> "Environment variables"
+- Befüllen Sie die Datei anhand der folgenden Key-Value Paare
 
-**Why enable `checkJs` in the JS template?**
+Option (1) - Sie verwenden kein Azure Key Vault (aktuell Repo 'Main'):
+```text
+# Azure ChatGPT LLM Configuration
+AZURE_OPENAI_API_KEY=""
+AZURE_OPENAI_API_VERSION=""
+AZURE_OPENAI_API_ENDPOINT=""
+AZURE_OPENAI_API_MODEL_NAME=""
+AZURE_OPENAI_API_DEPLOYMENT=""
 
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
+# Azure Database
+AZURE_MYSQL_HOST=""
+AZURE_MYSQL_PORT=""
+AZURE_MYSQL_USERNAME=""
+AZURE_MYSQL_PASSWORD=""
+AZURE_MYSQL_DATABASE_NAME=""
 
-**Why is HMR not preserving my local component state?**
+# Azure Speech Service
+AZURE_SPEECH_KEY=""
+AZURE_SPEECH_REGION=""
 
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
+# Website password
+UNLOCK=""
+```
 
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
+Option (2) - Sie verwenden einen Azure Key Vault (Repo 'Dev'):
+```text
+# Azure ChatGPT LLM Configuration
+AZURE_OPENAI_API_VERSION=""
+AZURE_OPENAI_API_ENDPOINT=""
+AZURE_OPENAI_API_MODEL_NAME=""
+AZURE_OPENAI_API_DEPLOYMENT=""
 
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+# Azure Database
+AZURE_MYSQL_HOST=""
+AZURE_MYSQL_PORT=""
+AZURE_MYSQL_DATABASE_NAME=""
+
+# Azure Speech Service
+AZURE_SPEECH_REGION=""
+
+# Key Vault
+KEY_VAULT_NAME=""
+TENNANT_ID=""
+CLIENT_ID=""
+CLIENT_SECRET=""
+```
+
+Fügen Sie dafür den Namen Ihres Vaults hinzu. Anschließend die TENNANT_ID Ihrer Web-App.<br>
+CLIENT_ID und CLIENT_SECRET finden Sie in "Microsoft Entra ID".<br><br>
+Speichern Sie die folgenden Key-Value Paare als "Secrets" in Ihrem Key-Vault.
+Hier sind die Namen der Secrets:
+```text
+azure-mysql-password
+azure-mysql-user
+azure-openai-key
+azure-speech-key
+unlock-page
 ```
